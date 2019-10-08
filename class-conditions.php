@@ -12,7 +12,7 @@ class Bolder_Fees_Conditions {
     function __construct(){
         global $status, $page, $woocommerce;
 
-        $this->clauses = array(
+        $this->clauses = apply_filters( 'wc_advanced_fees_clauses', array(
             'price-greater'     =>  __('Subtotal is greater than','bolder-fees-woo'),
             'price-less'        =>  __('Subtotal is less than','bolder-fees-woo'),
             'price-equal'       =>  __('Subtotal is equal too','bolder-fees-woo'),
@@ -55,7 +55,8 @@ class Bolder_Fees_Conditions {
             'date-after'        =>  __('Date is after','bolder-fees-woo'),
             'role-is'           =>  __('User role is','bolder-fees-woo'),
             'role-not'          =>  __('User role is not','bolder-fees-woo'),
-            );
+            ) );
+
 
         $this->bolder_fees_conds = get_option( 'woocommerce_be_bolder_fees_conditions' );
 
@@ -68,8 +69,9 @@ class Bolder_Fees_Conditions {
         $conds = get_option( 'woocommerce_be_bolder_fees_conditions' );
         $clause = $conds[ $cond ];
         $cond_value = $conds[ $cond ]['value'];
+        $current_clause = $clause['clause'];
 
-        switch ( $clause['clause'] ) {
+        switch ( $current_clause ) {
             case 'price-greater':
                 $return = $this->if_subtotal_greater( $cond_value, $cart_item );
                 break;
@@ -198,6 +200,8 @@ class Bolder_Fees_Conditions {
                 break;
 
             default:
+           apply_filters( 'wc_advanced_fees_'.$current_clause, $cond_value, $cart_item );
+
                 break;
         }
 

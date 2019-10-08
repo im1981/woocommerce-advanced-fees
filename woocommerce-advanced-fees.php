@@ -1,8 +1,10 @@
 <?php
 /*
-Plugin Name: Bolder Fees for WooCommerce
+Plugin Name: Advanced Fees for WooCommerce
 Plugin URI: http://bolderelements.net/plugins/bolder-fees-woocommerce/
 Description: Create additional and optional fees at checkout separate from shipping costs and taxes
+Author: Ingo Marent
+Author URI: https://ribasys.com
 Author: Bolder Elements
 Author URI: http://www.bolderelements.net/
 Version: 1.5
